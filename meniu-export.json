@@ -1,0 +1,55 @@
+[ {
+  "nume" : "Margherita",
+  "pret" : 31.0,
+  "categorie" : "FEL_PRINCIPAL",
+  "vegan" : true,
+  "calorii" : 500
+}, {
+  "nume" : "Pizza Casei",
+  "pret" : 34.0,
+  "categorie" : "FEL_PRINCIPAL",
+  "vegan" : false,
+  "calorii" : 500
+}, {
+  "nume" : "Paste Carbonara",
+  "pret" : 45.0,
+  "categorie" : "FEL_PRINCIPAL",
+  "vegan" : false,
+  "calorii" : 400
+}, {
+  "nume" : "Salată Grecească",
+  "pret" : 32.0,
+  "categorie" : "APERITIV",
+  "vegan" : true,
+  "calorii" : 350
+}, {
+  "nume" : "Lava Cake",
+  "pret" : 25.0,
+  "categorie" : "DESERT",
+  "vegan" : true,
+  "calorii" : 300
+}, {
+  "nume" : "Tiramisu",
+  "pret" : 23.0,
+  "categorie" : "DESERT",
+  "vegan" : true,
+  "calorii" : 320
+}, {
+  "nume" : "Friptură Vită",
+  "pret" : 110.0,
+  "categorie" : "FEL_PRINCIPAL",
+  "vegan" : false,
+  "calorii" : 450
+}, {
+  "nume" : "Apă Plată",
+  "pret" : 8.0,
+  "categorie" : "BAUTURA_RACORITOARE",
+  "volum" : 0.5,
+  "alcool" : false
+}, {
+  "nume" : "Vin Roșu",
+  "pret" : 18.0,
+  "categorie" : "BAUTURA_ALCOOLICA",
+  "volum" : 0.15,
+  "alcool" : false
+} ]

@@ -1,39 +1,282 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-.kotlin
+CAPITOLUL 1: INTRODUCERE (Introduction)
+DEFINIȚII DE BAZĂ
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
+DBMS (Database Management System): Sistem de Gestiune a Bazelor de Date. O colecție de date interconectate și un set de programe pentru a accesa acele date. Scopul este stocarea și regăsirea eficientă și convenabilă a informațiilor.
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+Data Redundancy (Redundanța datelor): Repetarea inutilă a acelorași date în mai multe fișiere, ceea ce duce la risipă de spațiu și inconsistență.
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+Data Inconsistency (Inconsistența datelor): Situație în care diverse copii ale acelorași date nu coincid (ex: adresa actualizată într-un loc, dar nu și în altul).
 
-### VS Code ###
-.vscode/
+Atomicity (Atomicitate): Proprietatea unei tranzacții de a fi "totul sau nimic". Dacă o parte a operațiunii eșuează, nicio modificare nu este salvată.
 
-### Mac OS ###
-.DS_Store
+ABSTRACȚIA DATELOR (Data Abstraction)
+
+Nivel Fizic (Physical Level): Cel mai de jos nivel. Descrie cum sunt stocate datele efectiv (structuri de date complexe).
+
+Nivel Logic (Logical Level): Descrie ce date sunt stocate și relațiile dintre ele. Folosit de programatori și administratorii bazei de date (DBA).
+
+Nivel de Vedere (View Level): Cel mai înalt nivel. Ascunde complexitatea și arată doar o parte a bazei de date relevantă pentru utilizator.
+
+Independența Fizică a Datelor: Abilitatea de a modifica schema fizică fără a fi nevoie să rescrii programele de aplicație.
+
+MODELE DE DATE
+
+Modelul Relațional (Relational Model): Folosește o colecție de tabele pentru a reprezenta datele și relațiile. Cel mai utilizat model.
+
+Modelul Entitate-Relație (E-R Model): Folosește entități (obiecte) și relații între ele. Utilizat des în proiectarea bazei de date.
+
+LIMBAJE
+
+DDL (Data Definition Language): Limbaj pentru definirea schemei bazei de date (ex: creare tabele, constrângeri). Rezultatul este stocat în Data Dictionary (Dicționarul de date/Metadate).
+
+DML (Data Manipulation Language): Limbaj pentru accesarea și manipularea datelor. Cunoscut și ca Query Language (Limbaj de interogare).
+
+Procedural: Utilizatorul specifică ce date vrea și cum să le obțină.
+
+Declarativ (Non-procedural): Utilizatorul specifică ce date vrea, fără a specifica cum (ex: SQL).
+
+ADMINISTRARE
+
+DBA (Database Administrator): Persoana responsabilă cu controlul central asupra datelor și programelor (definire schemă, structură stocare, autorizări, mentenanță).
+
+CAPITOLUL 2: MODELUL RELAȚIONAL (Relational Model)
+STRUCTURA
+
+Relație (Relation): Termenul tehnic pentru un Tabel.
+
+Tuplu (Tuple): Termenul tehnic pentru un Rând (o înregistrare) dintr-un tabel.
+
+Atribut (Attribute): Termenul tehnic pentru o Coloană a tabelului.
+
+Domeniu (Domain): Setul de valori permise pentru un atribut. Valorile trebuie să fie atomice (indivizibile).
+
+Valoarea Null: O valoare specială care indică faptul că valoarea este necunoscută sau nu există.
+
+SCHEMA VS INSTANȚĂ
+
+Schema Bazei de Date: Designul logic al bazei de date (structura, tipurile de date). Se schimbă rar.
+
+Instanța Bazei de Date: Datele efective conținute în baza de date la un moment dat (snapshot). Se schimbă frecvent.
+
+CHEI (KEYS) - FOARTE IMPORTANT
+
+Supercheie (Superkey): Un set de unul sau mai multe atribute care identifică în mod unic un tuplu într-o relație.
+
+Cheie Candidat (Candidate Key): O supercheie minimală (nu conține atribute inutile).
+
+Cheie Primară (Primary Key): Cheia candidat aleasă de designer pentru a identifica tuplurile. Atributele cheii primare nu pot fi Null.
+
+Cheie Străină (Foreign Key): Un atribut dintr-o relație (r1) care corespunde cheii primare a altei relații (r2). Leagă datele între tabele.
+
+ALGEBRA RELAȚIONALĂ (Relational Algebra)
+
+Limbaj procedural pur, baza pentru SQL.
+
+Selecție (σ - sigma): Selectează rânduri care satisfac o condiție (echivalent WHERE).
+
+Proiecție (Π - pi): Selectează anumite coloane (echivalent SELECT coloane).
+
+Reuniune (∪ - union): Unește două seturi de tupluri (trebuie să aibă aceeași structură).
+
+Diferență (− - set difference): Returnează tuplurile care sunt în prima relație dar nu în a doua.
+
+Produs Cartezian (×): Combină fiecare tuplu din prima relație cu fiecare tuplu din a doua.
+
+Redenumire (ρ - rho): Dă un nume nou rezultatului unei expresii.
+
+CAPITOLUL 3: INTRODUCERE ÎN SQL
+STRUCTURA DE BAZĂ
+
+CREATE TABLE: Definește o relație, atributele și tipurile lor.
+
+Tipuri comune: char(n), varchar(n) (lungime variabilă), int, numeric(p,d), float.
+
+SELECT: Listează atributele dorite (proiecție).
+
+DISTINCT: Folosit după SELECT pentru a elimina duplicatele din rezultat (SELECT DISTINCT nume).
+
+FROM: Listează relațiile scanate (produs cartezian).
+
+WHERE: Specifică condițiile pe care trebuie să le îndeplinească rândurile (selecție).
+
+ORDER BY: Sortează rezultatul (ASC pentru ascendent, DESC pentru descendent).
+
+OPERAȚII PE STRING-URI
+
+LIKE: Folosit pentru potrivirea tiparelor (pattern matching).
+
+%: Potrivește orice subșir (inclusiv gol).
+
+_: Potrivește exact un caracter.
+
+Ex: 'Intro%' găsește șiruri care încep cu "Intro".
+
+OPERAȚII CU MULȚIMI
+
+UNION: Reuniunea rezultatelor (elimină duplicatele automat; UNION ALL le păstrează).
+
+INTERSECT: Intersecția rezultatelor (elemente comune).
+
+EXCEPT: Diferența (elemente în primul rezultat, dar nu în al doilea).
+
+VALORI NULL
+
+Operații aritmetice cu null returnează null (ex: 5 + null = null).
+
+Compararea cu null (ex: 1 < null) returnează unknown.
+
+IS NULL: Operator pentru a verifica dacă o valoare este null (nu se folosește = null).
+
+FUNCȚII AGREGAT
+
+AVG: Media.
+
+MIN: Minimul.
+
+MAX: Maximul.
+
+SUM: Suma.
+
+COUNT: Numărul de elemente (COUNT(*) numără rândurile).
+
+GROUP BY: Grupează rândurile cu aceleași valori pentru a aplica funcții agregat pe grup.
+
+HAVING: Filtrează grupurile după agregare (spre deosebire de WHERE care filtrează înainte).
+
+SUBINTEROGĂRI (Nested Subqueries)
+
+IN / NOT IN: Verifică apartenența la un set de valori.
+
+SOME / ALL: Compară cu cel puțin o valoare (SOME) sau cu toate valorile (ALL) dintr-un set.
+
+EXISTS / NOT EXISTS: Verifică dacă o subinterogare returnează vreun rezultat (mulțime nevidă).
+
+UNIQUE: Verifică dacă subinterogarea nu are duplicate (nu este implementat peste tot).
+
+MODIFICAREA BAZEI DE DATE
+
+DELETE: Șterge tupluri (DELETE FROM student WHERE ...).
+
+INSERT: Inserează tupluri (INSERT INTO course VALUES (...)).
+
+UPDATE: Modifică valori în tupluri existente (UPDATE instructor SET salary = ... WHERE ...).
+
+CAPITOLUL 4: SQL INTERMEDIAR (Intermediate SQL)
+JOIN EXPRESSIONS (Îmbinări)
+
+INNER JOIN: Returnează doar perechile de tupluri care satisfac condiția de join.
+
+NATURAL JOIN: Un join automat bazat pe atributele cu același nume din cele două tabele (elimină duplicatele coloanelor comune). Periculos dacă există coloane cu același nume care nu trebuiau unite.
+
+OUTER JOIN: Păstrează tuplurile care nu au pereche, completând cu null.
+
+LEFT OUTER JOIN: Păstrează toate tuplurile din tabelul din stânga.
+
+RIGHT OUTER JOIN: Păstrează toate tuplurile din tabelul din dreapta.
+
+FULL OUTER JOIN: Păstrează tuplurile din ambele tabele.
+
+ON: Specifică predicatul de join (ex: student JOIN takes ON student.ID = takes.ID).
+
+VIEWS (Vederi)
+
+CREATE VIEW: Definește o relație virtuală care nu este pre-calculată sau stocată fizic, ci definită printr-o interogare.
+
+Utilă pentru securitate (ascunde date) sau simplificare (ascunde query-uri complexe).
+
+Materialized View: Un view care este calculat și stocat fizic pe disc (trebuie actualizat când datele sursă se schimbă).
+
+TRANZACȚII ÎN SQL
+
+O tranzacție este o secvență de interogări/update-uri tratată ca o unitate atomică.
+
+COMMIT: Face modificările permanente.
+
+ROLLBACK: Anulează toate modificările făcute în tranzacția curentă.
+
+CONSTRÂNGERI DE INTEGRITATE (Integrity Constraints)
+
+NOT NULL: Interzice valori null pe o coloană.
+
+UNIQUE: Asigură că toate valorile de pe coloană sunt unice (candidate key).
+
+CHECK (P): Asigură că un predicat P este satisfăcut (ex: CHECK (budget > 0)).
+
+Referential Integrity: Asigurat prin chei străine. Poate folosi ON DELETE CASCADE (dacă ștergi părintele, se șterg automat copiii).
+
+TIPURI DE DATE ȘI AUTORIZARE
+
+Date/Time: DATE (an, lună, zi), TIME (oră, minut, secundă), TIMESTAMP (combinație dată+timp).
+
+Large Objects: CLOB (Character Large Object - text mare), BLOB (Binary Large Object - imagini, video).
+
+Index: Creat cu CREATE INDEX pentru a accelera interogările.
+
+Autorizare:
+
+GRANT: Oferă privilegii (SELECT, INSERT, UPDATE, DELETE) utilizatorilor.
+
+REVOKE: Retrage privilegii.
+
+Roles: Grupuri de privilegii asignate unui nume, care apoi e asignat utilizatorilor.
+
+CAPITOLUL 5: SQL AVANSAT (Advanced SQL)
+ACCESAREA SQL DIN PROGRAME
+
+JDBC (Java Database Connectivity): API standard pentru conectarea Java la baze de date.
+
+Connection: Deschide conexiunea.
+
+Statement: Trimite interogări SQL.
+
+ResultSet: Reține rezultatul interogării (iterator).
+
+PreparedStatement: Interogare pre-compilată, previne SQL Injection (prin folosirea parametrilor ?).
+
+ODBC (Open Database Connectivity): Standard similar pentru C/C++ și alte limbaje.
+
+Embedded SQL: SQL scris direct în codul sursă (ex: C), prefixat de EXEC SQL.
+
+FUNCȚII ȘI PROCEDURI
+
+Permit "business logic" să fie stocat direct în baza de date.
+
+Stored Procedures: Proceduri stocate, apelate cu CALL. Pot avea parametri IN și OUT.
+
+Functions: Returnează o valoare sau un tabel.
+
+Limbaje procedurale standardizate (ex: PL/SQL în Oracle) adaugă IF, WHILE, variabile la SQL.
+
+TRIGGERS (Declanșatori)
+
+O instrucțiune executată automat de sistem ca efect secundar al unei modificări în baza de date.
+
+Componente:
+
+Event: Când se declanșează (ex: AFTER INSERT ON student).
+
+Condition: Condiția de verificare (WHEN ...).
+
+Action: Ce se execută.
+
+Pot referi valorile vechi (OLD.row) și noi (NEW.row).
+
+QUERY-URI RECURSIVE
+
+WITH RECURSIVE: Permite scrierea interogărilor care se referă la ele însele (ex: găsirea tuturor prerechizitelor directe și indirecte ale unui curs, ierarhii de angajați).
+
+AGREGARE AVANSATĂ ȘI OLAP
+
+Ranking: Funcții precum RANK(), DENSE_RANK(), ROW_NUMBER().
+
+Folosesc clauza OVER (ORDER BY ...) pentru a stabili ordinea în fereastră.
+
+Windowing: Calcularea agregatelor pe o "fereastră" mobilă de rânduri (ex: media pe ultimele 3 rânduri).
+
+OLAP (Online Analytical Processing): Analiza datelor multidimensionale.
+
+Pivot table (Cross-tabulation): Vizualizarea datelor pe 2 dimensiuni.
+
+Data Cube: Generalizare la n-dimensiuni.
+
+Operations: ROLLUP (agregare ierarhică), CUBE (agregare pe toate combinațiile posibile).

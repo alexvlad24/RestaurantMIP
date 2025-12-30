@@ -1,12 +1,18 @@
 package org.example;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
-public final class Drink extends Produs {
+@Entity
+@DiscriminatorValue("DRINK")
+public class Drink extends Produs {
     private double volum;
 
     public Drink(String nume, double pret, double volum, Categorie categorie) {
         super(nume, pret, categorie);
         this.volum = volum;
     }
+
+    public Drink() {}
 
     public double getVolum() {
         return volum;
@@ -21,6 +27,9 @@ public final class Drink extends Produs {
 
     @Override
     public String toString() {
-        return super.toString() + ", volum=" + volum + "Categorie=" + getCategorie() +'}';
+        // Afișează: Cola (10.0 RON) - 330ml [BĂUTURI_RĂCORITOARE]
+        // Folosim volumul (care e double sau int la tine)
+        return String.format("%s (%.2f RON) - %.0f L [%s]",
+                getNume(), getPret(), (double)volum, getCategorie());
     }
 }
